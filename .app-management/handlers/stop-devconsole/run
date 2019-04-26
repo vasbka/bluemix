@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+key=dev
+handler=start-devconsole
+pidfile=dev.pid
+
+app_management_dir=$(cd `dirname $0`/../.. && pwd)
+cd $app_management_dir
+
+pid=$(cat ${app_management_dir}/handlers/${handler}/${pidfile})
+kill -9 ${pid}
+
+${app_management_dir}/scripts/remove_proxy_entry "${key}"

@@ -1,0 +1,177 @@
+/* reset*/
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,li,fieldset,form,label,legend {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	vertical-align: baseline;
+	background: no-scroll transparent
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+* {
+	box-sizing: border-box;
+}
+
+/*styles*/
+body {
+	font: 16px HelveticaNeue, 'Helvetica Neue', HelveticaNeueRoman, HelveticaNeue-Roman, 'Helvetica Neue Roman', TeXGyreHerosRegular, Helvetica, Tahoma, Geneva, Arial, sans-serif;
+	line-height: 1.666;
+	background: #2d3f49;
+	color: white;
+}
+a {
+	color: #56a8fd;
+}
+
+.BluemixBanner {
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+
+	-webkit-align-items: center;
+	align-items: center;
+	display: -webkit-flex;
+	display: flex;
+
+	font-size: 1.5em;
+	background-color: #152935;
+	/*background-color: #26343f;*/
+	box-shadow: 0 0 1pt 1pt rgba(0, 0, 0, 0.3);
+	height: 75px;
+	overflow: hidden;
+}
+.ProductName {
+	margin-left: 20px;
+	margin-right: auto;
+}
+.ProductSubtitleLight {
+	font-weight: 100;
+}
+.ProductSubtitleBold {
+	font-weight: 700;
+	font-family: "HelveticaNeueBold", "HelveticaNeue-Bold", "Helvetica Neue Bold", "HelveticaNeue", "Helvetica Neue", "TeXGyreHerosBold", "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
+}
+.ProductSubtitleDebugger {
+	font-weight: 400;
+	font-size: 18px;
+	color: #41d6c3;
+}
+
+.signin-card {
+	overflow: hidden;
+	max-width: 520px;
+	min-width: 300px;
+	min-height: 350px;
+	margin: 30px 20px 0 20px;
+}
+.signin-card h2, .signin-card h3 {
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-weight: normal;
+}
+.signin-card h2 {
+	/*font-size: 2.25em;*/
+	font-size: 36px;
+	line-height: 40px;
+	margin: 0 0 40px 0;
+	border-bottom: 2px solid #56a8fd;
+	padding-bottom: 10px;
+}
+.signin-card h3 {
+	font-size: 1.75em;
+}
+.signin-section-container {
+	width: 420px;
+}
+.signin-card .signin-section:first-child {
+	margin-top: 40px;
+}
+.signin-card .signin-section {
+	margin-top: 80px;
+}
+.signin-section label {
+	display: block;
+	font-weight: 700;
+	/*color: rgba(255, 255, 255, 0.8);*/
+}
+.signin-section input {
+	display: block;
+	font-size: 16px;
+	color: white;
+	background: #394b54;
+	border: 1px solid #00AED1; /*#008abf;*/
+	border-radius: 0;
+	height: 38px;
+	padding: 3px 15px 3px 15px;
+	margin: 0 0 15px 0;
+}
+.signin-section input:focus {
+	outline: 2px auto;
+	outline: 2px auto -webkit-focus-ring-color;
+}
+.username, .password {
+	width: calc(100% - 30px);
+}
+.passcode {
+	width: 220px;
+}
+
+/* Increase left margin if viewport size permits */
+@media screen and (min-width: 650px) {
+	.ProductName, .signin-card {
+		margin-left: 225px !important;
+		margin-right: 0 !important;
+	}
+	.runtime-warning {
+		margin-right: 0;
+	}
+}
+/* reduce padding for small viewport height */
+@media screen and (max-height: 640px) {
+}
+
+.btn {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+
+	display: inline-block;
+	font-size: 14px;
+	letter-spacing: 0.5px;
+	font-weight: bold;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	cursor: pointer;
+
+	border: 2px solid transparent;
+	background: #5aaafa;
+
+	margin: 0 auto;
+	height: 2.5rem;
+	padding: 0 12px;
+	color: white;
+	min-width: calc(100px + 24px + 4px);
+}
+.btn:hover, .btn:active, .btn:focus {
+	background: #7cc7ff;
+}

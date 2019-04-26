@@ -1,0 +1,93 @@
+SDK for Node.js(TM) (node.js-6.17.0, buildpack-v3.26-20190313-1440)
+
+-----> IBM SDK for Node.js Buildpack v3.26-20190313-1440
+       Based on Cloud Foundry Node.js Buildpack v1.5.24
+
+-----> Creating runtime environment
+       
+       NPM_CONFIG_LOGLEVEL=error
+       NPM_CONFIG_PRODUCTION=true
+       NODE_ENV=production
+       NODE_MODULES_CACHE=true
+
+-----> Installing binaries
+       engines.node (package.json):  6.x
+       engines.npm (package.json):   unspecified (use default)
+       
+       Resolving node version 6.x via 'node-version-resolver'
+       Downloading and installing node 6.17.0...
+       Using default npm version: 3.10.10
+
+-----> Restoring cache
+       Skipping cache restore (new runtime signature)
+
+-----> Building dependencies
+       Installing node modules (package.json)
+       NodejsStarterApp@0.0.1 /tmp/app
+       ├─┬ cfenv@1.0.4
+       │ ├─┬ js-yaml@3.7.0
+       │ │ ├─┬ argparse@1.0.10
+       │ │ │ └── sprintf-js@1.0.3
+       │ │ └── esprima@2.7.3
+       │ ├── ports@1.1.0
+       │ └── underscore@1.8.3
+       └─┬ express@4.15.5
+       ├─┬ accepts@1.3.5
+       │ ├─┬ mime-types@2.1.24
+       │ │ └── mime-db@1.40.0
+       │ └── negotiator@0.6.1
+       ├── array-flatten@1.1.1
+       ├── content-disposition@0.5.2
+       ├── content-type@1.0.4
+       ├── cookie@0.3.1
+       ├── cookie-signature@1.0.6
+       ├─┬ debug@2.6.9
+       │ └── ms@2.0.0
+       ├── depd@1.1.2
+       ├── encodeurl@1.0.2
+       ├── escape-html@1.0.3
+       ├── etag@1.8.1
+       ├─┬ finalhandler@1.0.6
+       │ └── unpipe@1.0.0
+       ├── fresh@0.5.2
+       ├── merge-descriptors@1.0.1
+       ├── methods@1.1.2
+       ├─┬ on-finished@2.3.0
+       │ └── ee-first@1.1.1
+       ├── parseurl@1.3.3
+       ├── path-to-regexp@0.1.7
+       ├─┬ proxy-addr@1.1.5
+       │ ├── forwarded@0.1.2
+       │ └── ipaddr.js@1.4.0
+       ├── qs@6.5.0
+       ├── range-parser@1.2.0
+       ├─┬ send@0.15.6
+       │ ├── destroy@1.0.4
+       │ ├─┬ http-errors@1.6.3
+       │ │ ├── inherits@2.0.3
+       │ │ ├── setprototypeof@1.1.0
+       │ │ └── statuses@1.5.0
+       │ └── mime@1.3.4
+       ├── serve-static@1.12.6
+       ├── setprototypeof@1.0.3
+       ├── statuses@1.3.1
+       ├─┬ type-is@1.6.17
+       │ └── media-typer@0.3.0
+       ├── utils-merge@1.0.0
+       └── vary@1.1.2
+       
+
+-----> Installing App Management
+Checking for Dynatrace credentials
+No Dynatrace Service Found (service with substring dynatrace not found in VCAP_SERVICES)
+
+-----> Caching build
+       Clearing previous node cache
+       Saving 2 cacheDirectories (default):
+       - node_modules
+       - bower_components (nothing to cache)
+
+-----> Build succeeded!
+       ├── cfenv@1.0.4
+       └── express@4.15.5
+       

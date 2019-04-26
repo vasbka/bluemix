@@ -1,0 +1,165 @@
+html {
+	background: inherit;
+}
+body {
+	background: #1d3649; /*IBM Blue 80*/
+	font: 14px "Helvetica Neue", "HelveticaNeue", "Helvetica", "Segoe UI", "Segoe", "Calibri", "Roboto", "Droid Sans", "Arial Unicode MS", Arial, sans-serif;
+	color: white;
+	margin: 0;
+}
+.show {
+	display: inherit !important;
+}
+.open {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+
+	border: 2px solid #41d6c3;
+	border-radius: 3px;
+	padding: 5px 12px;
+	font-weight: bold;
+	background: transparent;
+	font-size: inherit;
+	color: #41d6c3;
+	cursor: pointer;
+	text-transform: uppercase;
+	height: auto !important;
+	/*width: 150px;*/
+	white-space: nowrap;
+}
+
+.open:hover {
+	background: #41d6c3;
+	color: #1d3649;
+}
+
+h1, #lights, #help, #open {
+	display: none;
+}
+
+.window {
+	padding-top: 22px;
+	background: black; /*must be same as .terminal*/
+	border: 1px solid #152935; /*IBM Blue 90*/
+	border-radius: 3px;
+	top: 45px;
+	left: 10px;
+}
+.bar {
+	background: #152935; /*IBM Blue 90*/
+	height: 22px;
+	padding: 0;
+	border-bottom: 2px solid #2d3f4a; /*Modified Blue 70*/
+	font-size: 12px;
+}
+/*no select*/
+.open, .bar {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+.terminal {
+	font: 12px Menlo, Monaco, "Lucida Console", monospace;
+	color: #ecf0f2; /*IBM Cool 4*/
+	border: 5px solid black;
+	border-top-width: 10px;
+}
+.title {
+	/* Hide the title shown in the bar, since we show each tab's title instead */
+	display: none;
+}
+div.tab:not(.newtab) {
+	font-size: inherit;
+	font-weight: inherit;
+	font-family: "Helvetica Neue", "HelveticaNeue", "Helvetica", "Segoe UI", "Segoe", "Calibri", "Roboto", "Droid Sans", "Arial Unicode MS", Arial, sans-serif;
+	margin: 0 4px 0 0;
+	background: #152935;
+	height: calc(100% - 4px);
+	padding: 4px 5px 0 9px;
+	box-shadow: 4px 0 2px 0 rgba(0, 0, 0, 0.2), -2px 0 2px 0 rgba(0, 0, 0, 0.2);
+	white-space: nowrap;
+	position: relative;
+	cursor: default;
+	/* border-right: 1px solid #2d3f4a; */
+	/* margin-right: 4px; */
+}
+div.tab:not(.newtab):hover {
+	background: #1d3649;
+}
+/* Targets the first visible tab, which happens to be the 3rd .tab child :-| */
+div.tab:nth-of-type(3) {
+	margin-left: 0;
+	box-shadow: 4px 0 2px 0 rgba(0, 0, 0, 0.2);
+}
+/* Tab text label */
+div.tab .inner {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: inline-block;
+	min-width: 90px;
+	max-width: 110px;
+	margin-right: calc(12px + 2px);
+}
+div.tab .inner:before {
+	content: attr(data-process);
+}
+div.tab.focus, div.tab.focus:hover {
+	background: #2d3f4a;
+}
+div.tab:hover {
+	/*Override bold tab on hover*/
+	font-weight: inherit;
+}
+.background-write .inner {
+	color: #ab4642;
+}
+
+/*Close tab*/
+.closetab {
+	display: inline-block;
+	font-size: 1.2em;
+	position: absolute;
+	right: 2px;
+	width: 12px;
+	height: 12px;
+	cursor: pointer;
+	/* 5x5 PNG*/
+	background-position: 4px 3px;
+}
+.closetab {
+	background-repeat: no-repeat;
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFBAMAAAB/QTvWAAAAG1BMVEX///8AAAD////////////////////Ayc/f5uufoXAyAAAAB3RSTlNrAFNGOl9b9X/pHAAAABxJREFUCNdjKBYpYFBnd2AQaBBgMGcPYCgTKgAAItEDjIQznNwAAAAASUVORK5CYII=);
+}
+
+/*New tab button*/
+div.tab.newtab {
+	margin: 4px 0 0 3px;
+	min-width: inherit;
+	background: transparent;
+	padding: 0;
+	color: #dfe6eb;
+	box-shadow: 0 0 0 0;
+}
+div.tab.newtab:before {
+	content: "";
+}
+div.tab.newtab:hover {
+	color: #ecf0f2; /*IBM Cool 4*/
+}
+div.tab.newtab:active {
+	margin: 5px 0 0 4px;
+}
+
+.plus, div.tab.newtab {
+	width: 12px;
+	height: 12px;
+	background-repeat: no-repeat;
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMAQMAAABsu86kAAAABlBMVEUAAACUo6ubUzypAAAAAXRSTlMAQObYZgAAABJJREFUCNdjYGNAQf8/ABGaIABKJQQb5VHmHwAAAABJRU5ErkJggg==);
+}
+.plus {
+	display: inline-block;
+	margin: 0 2px -1px -3px;
+}

@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+# Starts the developer console (Bluemix Debug) page.
+# Usage:
+#   start-devconsole/run
+#
+app_management_dir=$(cd `dirname $0`/../.. && pwd)
+handler_dir=$app_management_dir/handlers/start-devconsole
+node=$app_management_dir/node/bin/node
+handler_label=devconsole
+
+if [ ! -e "${node}" ]; then
+    echo "ERROR: You must restage your application to use the ${handler_label} utility." >&2
+    exit 1
+fi
+
+prefix=bluemix-debug/manage
+port=8788
+key=dev
+pidfile=${handler_dir}/dev.pid
+
+# If needed, install the dev UI
+pushd ${handler_dir} &>/dev/null
+if ! ../install-devconsole/run
+then
+    exit 1
+fi
+
+# Start the dev UI
+echo "Starting utility: ${handler_label}..."
+$node bin/dev.js $prefix $port &
+pid=$!
+echo "${pid}" > ${pidfile}
+
+# Create proxy entry for /bluemix-debug/manage
+config_entry="{\"type\": \"http-forward\", \"backend\": \"127.0.0.1:${port}\", \"host\": \"*\", \"uri_prefix\": \"${prefix}\"}"
+echo "Adding proxy entry with: ${config_entry}"
+${app_management_dir}/scripts/add_proxy_entry "${key}" "${config_entry}"
+

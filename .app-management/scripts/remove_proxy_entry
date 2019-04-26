@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+# Encoding: utf-8
+
+require 'json'
+
+raise 'Please pass me a key' if ARGV[0].nil?
+key = ARGV[0]
+
+# Calculate the app dir location. Do not rely on the current working directory being the app dir.
+app_dir = File.expand_path('../..', File.dirname(__FILE__))
+
+proxy_config_file = File.join(app_dir, '.app-management', 'bin', 'proxy.config')
+return unless File.exist?(proxy_config_file)
+data = JSON.parse(File.open(proxy_config_file, 'r:utf-8', &:read))
+
+# Remove entry and write back to disk.
+data['entries'].delete(key)
+File.open(proxy_config_file, 'w:utf-8') { |file| file.write(data.to_json) }

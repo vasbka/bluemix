@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+# Helper script for installing a handler written in Node.js.
+#
+# Usage: install_helper [OPTIONS]
+#
+# Options
+#   --dir       Handler directory (required).
+#   --label     Label to use when referring to handler in output (required).
+#   --test      Test only: exit 0 if handler is already installed, 1 otherwise.
+#
+# Invoking without the --test option will cause the handler to be installed if necessary.
+
+# Always use the versions of Node/npm given in ${app_management_dir}/node. Don't trust PATH.
+app_management_dir=$(cd $(dirname "$0")/../ && pwd)
+node=$app_management_dir/node/bin/node
+npm=$app_management_dir/node/bin/npm
+
+read_version() {
+    echo $(cat node_modules/.node_version 2>/dev/null)
+}
+
+write_version() {
+    $node -v > node_modules/.node_version
+}
+
+for arg in "$@"
+do
+    case "$arg" in
+        "--dir="*    ) handler_dir="${arg#*=}" ;;
+        "--label="*  ) handler_label="${arg#*=}" ;;
+        "--test"     ) test_only=1 ;;
+        "--logstart" ) logstart=1 ;;
+    esac
+done
+
+[[ ! -d "$handler_dir" ]] && echo "Missing or nonexistent directory given by --dir option" >&2 && exit 2
+[[ -z "$handler_label" ]] && echo "Missing --label option" >&2 && exit 2
+
+handler_dir=$(cd $handler_dir && pwd)
+pushd ${handler_dir} &>/dev/null
+
+# Determine if the handler has already been installed. If it has, a .node_version file
+# exists and contains a version string matching `$node -v`.
+found_node=$(read_version)
+expected_node="$($node -v)"
+if [[ "$found_node" == "$expected_node" ]]; then
+    # echo "${handler_label} is installed."
+    exit 0
+elif [[ "$test_only" ]]; then
+    exit 1
+elif [[ "$found_node" ]]; then
+    # .node_version exists but did not match. Should not happen.
+    echo "WARNING: Utility ${handler_label} will be reinstalled." >&2
+fi
+
+echo "Installing utility: ${handler_label}..."
+echo "WARNING: Installation may consume a lot of memory. To prevent crashes, restage the app." >&2
+
+# node-gyp needs `node` on the PATH, so put ours on it before calling npm install.
+PATH="$app_management_dir/node/bin:$PATH"
+if ! $npm install --production .
+then
+    echo "ERROR: Failed to install utility ${handler_label}. It will not be available." >&2
+    exit 2
+fi
+write_version

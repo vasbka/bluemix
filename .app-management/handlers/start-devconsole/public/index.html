@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<link rel="schema.DC" href="http://purl.org/DC/elements/1.0/"/>
+	<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAABDlBMVEUAAAARmqEAsLYErc8CsJg7TVYArtEAsZk7S1QArtEAsZkArtEAsZkArtEAsZkArtEArtEArtEArtGFyro6cnU7S1Q7S1Q7S1QAsZk7S1QAsZk7S1QAsZk7S1QAsZk7S1Q7S1SAqLk7amk7eIp0rKNufYcYppEzhnwlm4o9XmoAsZkAsZkAsZkAsZkAsZkArtE7S1Q+T1f5/P3p8/TV1deTlpxGU1zh7vXh8ey+3uy+4dg+s9RAuKH09PTW6+yl0+Z7w93a2dxbutgrsdOl1su6u78inrqrrbKho6hVu6cas5uDh49cZGxVX2fK4+6z2emUzOLK5t4cr9Kz29HKzc/Gx8qVz8Jqwa8ytZ4OsplvvoL+AAAALnRSTlMABxb18/P8/Pzg4MfHuLeXeFgr/vXexLOZlHl0WVUsKBT9/ff09PLy7++TdFQodhcQ3gAAAUFJREFUOMttkdd6gzAMRg2E7AQyuvfetiFJmU3TJB3p3uP9X6Rg9DFszoV18Z8PIQkJ1DFQR7mc4pjVvFyqJkJVQiInOMWymMuFtFCQBeEYZ1jk87NSViitc0ITczQRY54Cu27P7Lk/vLAG8fn1Z8fHfmf45mdaSHOQ9wf0AAf8Te3f9E+u0IjbAaVGNObUTY25qUb545URvF2W3NuzZFFLNOLugZV9Znx/xKveKIPQf2JlmwkzOz7WAgUujKgesh4mnDtHOCIBE5OQGsuFFuWbUBhbwdNCeT/ZJSGvL8FTkZA4pso+8G6Nw6IjYVF0h4RcOqwoMuJXrSostyaEoSHuWF9bHvFGw2ePRBTb3Ln3nODczojENFCWBuHghXYRgqQFh5YVNMQjKwSAMQX0tKAjEakCIaxapEUAOJZIDWI49z9upHYF5vHOxQAAAABJRU5ErkJggg==">
+	<meta name="dcterms.rights" content="(c) Copyright IBM Corporation 2015. All Rights Reserved.">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Bluemix Developer Console</title>
+	<link rel="stylesheet" href="./stylesheets/style.css" media="all">
+</head>
+<body>
+	<header class="BluemixBanner">
+		<h4 class="ProductName ProductSubtitleLight">
+			<span>IBM</span>
+			<span class="ProductSubtitleBold">Bluemix</span>
+			<span class="ProductSubtitleDebugger">Developer Console</span>
+		</h4>
+	</header>
+	<div class="container">
+		<div class="content">
+			<div class="runtime-warning">You are now managing the runtime (process) of your app.
+			To manage your project, visit your <a href="https://console.ng.bluemix.net/">app dashboard</a>.
+			</div>
+			<div class="flex-container disabled" id="vert-stack">
+				<div class="flex-item app-panel">
+					<h3 id="app-name" class="app-name">&nbsp;</h3>
+					<div class="app-route"><span class="route">Route:</span> <a id="app-route-link" href="../../"></a></div>
+				</div>
+				<div class="flex-item runtime-panel">
+					<div class="tile-segmented">
+						<div class="tile">
+							<div id="icon" class="health"></div>
+						</div>
+						<div class="tile runtime-state">
+							<div id="state"></div>
+						</div>
+						<div class="tile runtime-buttons">
+							<!-- Buttons will be enabled/disabled dynamically -->
+							<button class="btn runtime-btn" id="restart-break" name="restart-break">Suspend</button>
+							<button class="btn runtime-btn" id="restart" name="restart">Restart</button>
+							<button class="btn runtime-btn disabled" id="start-break" name="start-break">Suspend</button>
+							<button class="btn runtime-btn disabled" id="start" name="start">Start</button>
+							<button class="btn runtime-btn disabled" id="stop" name="stop">Stop</button>
+						</div>
+					</div>
+
+					<div id="error" class="error"></div>
+				</div>
+				<!-- Tools go here -->
+			</div>
+		</div>
+	</div>
+
+	<script src="./components/jquery/dist/jquery.min.js"></script>
+	<script src="./js/manage.js"></script>
+<script>
+/*global ga window document*/
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-10864409-2', 'auto');
+ga('send', 'pageview');
+</script>
+</body>
+</html>

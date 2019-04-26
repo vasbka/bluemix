@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+
+# Only allow 1 copy of this script to run at a time
+scriptfile=$0
+exec 200<$scriptfile
+flock -n 200
+acquired_lock=$?
+if [ $acquired_lock -ne 0 ]; then
+    echo Already running $scriptfile.
+    exit 0
+fi
+
+app_management_dir=$(cd `dirname $0`/../.. && pwd)
+handler_dir=$app_management_dir/handlers/start-shell
+node=$app_management_dir/node/bin/node
+handler_label=shell
+
+if [ ! -e "${node}" ]; then
+    echo "ERROR: You must restage your application to use the ${handler_label} utility." >&2
+    exit 1
+fi
+
+prefix=bluemix-debug/shell
+port=8789
+key=shell
+pidfile=${handler_dir}/shell.pid
+
+# If needed, install the shell UI
+pushd $handler_dir &>/dev/null
+if ! ../install-shell/run
+then
+    exit 1
+fi
+
+# Check if shell is already running
+${app_management_dir}/utils/tool-state ${pidfile}
+runstate=$?
+if [ $runstate -eq 0 ]; then
+    pid=$(cat ${pidfile})
+    echo "Already running $key (PID: $pid)."
+    exit 0
+fi
+
+# Start the shell UI
+echo "Starting utility: ${handler_label}..."
+$node server.js $prefix $port &
+pid=$!
+echo "${pid}" > ${pidfile}
+
+# Print running processes
+# ps aux
+
+config_entry="{\"type\": \"http-forward\", \"backend\": \"127.0.0.1:${port}\", \"host\": \"*\", \"uri_prefix\": \"${prefix}\"}"
+echo "Adding proxy entry with: ${config_entry}"
+${app_management_dir}/scripts/add_proxy_entry "${key}" "${config_entry}"
+
+# Sleep needed for error messages to show up when things crash
+# sleep 1

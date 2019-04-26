@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Login</title>
+		<script type="text/javascript">
+			function submitPassword(form){
+				var username = form.elements["username"].value;
+				if (!username) {
+					alert("Please input user name.")
+					return;
+				}
+
+				var password = form.elements["password"].value;
+				if (!password) {
+					alert("Please input password.")
+					return;
+				}
+
+				sendRequest(username, password, false)
+			}
+
+			function submitPasscode(form){
+				var passcode = form.elements["passcode"].value;
+				if (!passcode) {
+					alert("Please input passcode.")
+					return;
+				}
+
+				sendRequest("", passcode, true)
+			}
+
+			function sendRequest(username, credential, isPasscode) {
+				request = new XMLHttpRequest();
+				request.onreadystatechange = function(){
+					if (request.readyState === XMLHttpRequest.DONE) {
+						if (request.status === 200){
+							window.location.reload(true)
+						} else {
+							try {
+								var jsonResponse = JSON.parse(request.responseText)
+								if (jsonResponse.error_description) {
+									alert(jsonResponse.error_description)
+								} else if (jsonResponse.error) {
+									alert(jsonResponse.error)
+								} else {
+									alert(request.responseText)
+								}
+							} catch(e) {
+								alert(request.responseText)
+							}
+						}
+					}
+				}
+
+				request.open("POST", "/bluemix-debug/authenticate")
+				request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+				var content = (isPasscode ? ("passcode=" + encodeURIComponent(credential) + "&type=passcode") :
+					("username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(credential) + "&type=password"))
+				request.send(content)
+			}
+		</script>
+		<link rel="stylesheet" type="text/css" href="/bluemix-debug/authenticate/login.css">
+	</head>
+	<body>
+		<header class="BluemixBanner">
+			<h4 class="ProductName ProductSubtitleLight">
+				<span>IBM</span>
+				<span class="ProductSubtitleBold">Bluemix</span>
+				<span class="ProductSubtitleDebugger">Developer Console</span>
+			</h4>
+		</header>
+
+		<div class="signin-card">
+			<h2>Log In</h2>
+			<p>
+				You can log in by typing your user name and password or by typing a one-time passcode.
+				If you need a passcode, go to the <a href="$passcode_url" target="_blank">passcode page</a>.
+			</p>
+			<div class="signin-section-container">
+				<section class="signin-section">
+					<form id="passwordForm" onsubmit="event.preventDefault();submitPassword(this);">
+						<label for="username">User name:</label>
+						<input class="username" id="username" name="username" type="text">
+						<label for="password">Password:</label>
+						<input class="password" id="password" name="password" type="password">
+					</form>
+					<button class="btn" type="submit" form="passwordForm" value="Submit">Submit</button>
+				</section>
+
+				<section class="signin-section">
+					<form id="passcodeForm" onsubmit="event.preventDefault();submitPasscode(this);">
+						<label for="passcode">Passcode:</label>
+						<input class="passcode" id="passcode" name="passcode" type="password">
+					</form>
+					<button class="btn" type="submit" form="passcodeForm" value="Submit">Submit</button>
+				</section>
+			</div>
+		</div>
+	</body>
+</html>

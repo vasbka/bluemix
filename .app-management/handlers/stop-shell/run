@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+app_management_dir=$(cd `dirname $0`/../.. && pwd)
+cd $app_management_dir
+
+pid=$(cat ${app_management_dir}/handlers/start-shell/shell.pid)
+kill -9 ${pid}
+
+key=shell
+${app_management_dir}/scripts/remove_proxy_entry "${key}"

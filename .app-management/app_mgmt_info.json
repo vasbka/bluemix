@@ -1,0 +1,6 @@
+{
+  "container": "warden",
+  "ssh_enabled": false,
+  "proxy_enabled": false,
+  "proxy_supported_version": ["v1", "v2"]
+}
